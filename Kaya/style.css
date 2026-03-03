@@ -3,8 +3,8 @@
 :root {
     --bg: #ffffff;
     --text: #111111;
-    --nav-bg: rgba(255,255,255,0.6);
     --accent: #111111;
+    --nav-bg: rgba(255,255,255,0.6);
 }
 
 * { box-sizing: border-box; }
@@ -17,7 +17,6 @@ body {
     background: var(--bg);
     color: var(--text);
     transition: 0.4s ease;
-    overflow-x: hidden;
 }
 
 /* Grain */
@@ -28,7 +27,6 @@ body::after {
     pointer-events: none;
     background-image: url("https://grainy-gradients.vercel.app/noise.svg");
     opacity: 0.05;
-    z-index: 9999;
 }
 
 /* Navbar */
@@ -55,10 +53,7 @@ body::after {
     color: var(--accent);
 }
 
-.nav-links {
-    display: flex;
-    align-items: center;
-}
+.nav-links { display: flex; align-items: center; }
 
 .nav-links a {
     margin: 0 15px;
@@ -67,14 +62,68 @@ body::after {
     font-size: 14px;
 }
 
-.nav-links button {
-    margin-left: 15px;
-    padding: 6px 16px;
-    border-radius: 20px;
+/* Luxury Button */
+.lux-btn {
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 30px;
     border: 1px solid var(--accent);
     background: transparent;
     color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 1px;
     cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Shimmer */
+.lux-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-25deg);
+}
+
+.lux-btn:hover::after {
+    animation: shimmer 0.8s ease;
+}
+
+@keyframes shimmer {
+    100% { left: 125%; }
+}
+
+/* Fill Hover */
+.lux-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: var(--accent);
+    transition: 0.4s ease;
+    z-index: -1;
+}
+
+.lux-btn:hover::before { width: 100%; }
+.lux-btn:hover { color: var(--bg); }
+
+/* Pulse */
+.lux-btn {
+    animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Gold Glow */
+.gold .lux-btn:hover {
+    box-shadow: 0 0 20px rgba(212,175,55,0.6);
 }
 
 /* Hero */
@@ -86,10 +135,7 @@ body::after {
     justify-content: center;
 }
 
-.hero-overlay {
-    text-align: center;
-    color: white;
-}
+.hero-overlay { text-align: center; color: white; }
 
 .hero h1 {
     font-family: 'Playfair Display', serif;
@@ -97,16 +143,8 @@ body::after {
     letter-spacing: 6px;
 }
 
-.hero p {
-    margin-top: 20px;
-    letter-spacing: 3px;
-}
-
 /* Sections */
-section {
-    padding: 140px 12%;
-    text-align: center;
-}
+section { padding: 140px 12%; text-align: center; }
 
 h2 {
     font-family: 'Playfair Display', serif;
@@ -119,15 +157,6 @@ h2 {
     background: url('https://picsum.photos/1600/1000?random=30') center/cover no-repeat fixed;
 }
 
-/* Upload */
-.upload-area {
-    margin-bottom: 40px;
-}
-
-.upload-area input {
-    margin-right: 10px;
-}
-
 /* Gallery */
 .gallery {
     display: grid;
@@ -135,9 +164,7 @@ h2 {
     gap: 40px;
 }
 
-.image-wrapper {
-    position: relative;
-}
+.image-wrapper { position: relative; }
 
 .gallery img {
     width: 100%;
@@ -145,9 +172,7 @@ h2 {
     transition: 0.5s ease;
 }
 
-.gallery img:hover {
-    transform: scale(1.05);
-}
+.gallery img:hover { transform: scale(1.05); }
 
 .delete-btn {
     position: absolute;
@@ -158,7 +183,6 @@ h2 {
     border: none;
     padding: 5px 8px;
     cursor: pointer;
-    font-size: 12px;
 }
 
 /* Modal */
@@ -187,61 +211,29 @@ h2 {
 }
 
 /* Fade */
-.fade {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: 1s ease;
-}
-
-.fade.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+.fade { opacity: 0; transform: translateY(60px); transition: 1s ease; }
+.fade.show { opacity: 1; transform: translateY(0); }
 
 /* Themes */
 .dark {
     --bg: #0f0f0f;
     --text: #ffffff;
-    --nav-bg: rgba(20,20,20,0.6);
     --accent: #ffffff;
+    --nav-bg: rgba(20,20,20,0.6);
 }
 
 .gold {
     --bg: #0f0f0f;
     --text: #d4af37;
-    --nav-bg: rgba(20,20,20,0.7);
     --accent: #d4af37;
+    --nav-bg: rgba(20,20,20,0.7);
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-    .gallery { grid-template-columns: repeat(2, 1fr); }
-}
-
 @media (max-width: 768px) {
-
     .hero { background-attachment: scroll; }
-
     .hero h1 { font-size: 42px; }
-
-    .gallery { grid-template-columns: 1fr; gap: 25px; }
-
+    .gallery { grid-template-columns: 1fr; }
     section { padding: 100px 8%; }
-
-    .navbar {
-        flex-direction: column;
-        gap: 12px;
-        border-radius: 30px;
-    }
-
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-    }
-
-    body {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
+    .navbar { flex-direction: column; gap: 12px; border-radius: 30px; }
 }

@@ -5,26 +5,18 @@ let mode = 0;
 themeBtn.addEventListener("click", () => {
     mode++;
     document.body.classList.remove("dark", "gold");
-
-    if (mode % 3 === 1) {
-        document.body.classList.add("dark");
-    } else if (mode % 3 === 2) {
-        document.body.classList.add("gold");
-    }
+    if (mode % 3 === 1) document.body.classList.add("dark");
+    else if (mode % 3 === 2) document.body.classList.add("gold");
 });
 
-// Fade Animation
-const fadeEls = document.querySelectorAll(".fade");
-
+// Fade
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-        }
+        if (entry.isIntersecting) entry.target.classList.add("show");
     });
 }, { threshold: 0.2 });
 
-fadeEls.forEach(el => observer.observe(el));
+document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
 // Gallery System
 const gallery = document.getElementById("gallery");
