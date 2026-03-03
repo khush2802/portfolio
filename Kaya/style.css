@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap');
 
 :root {
     --bg: #ffffff;
     --text: #111111;
-    --accent: rgba(255,255,255,0.1);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -20,35 +23,46 @@ h1, h2 {
     letter-spacing: 3px;
 }
 
+/* HERO */
+
 .hero {
     height: 100vh;
     background: url('https://picsum.photos/1600/1000?random=20') center/cover no-repeat fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .hero-overlay {
-    backdrop-filter: blur(10px);
-    background: rgba(0,0,0,0.3);
-    padding: 60px;
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.35);
+    padding: 60px 80px;
     text-align: center;
     color: white;
+    max-width: 90%;
 }
 
 .hero h1 {
     font-size: 70px;
-    margin-bottom: 10px;
+    margin: 0;
+}
+
+.hero p {
+    margin-top: 15px;
+    font-size: 18px;
+    letter-spacing: 2px;
 }
 
 button {
-    margin-top: 20px;
-    padding: 10px 30px;
+    margin-top: 30px;
+    padding: 12px 30px;
     border: 1px solid white;
     background: transparent;
     color: white;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    font-size: 14px;
 }
 
 button:hover {
@@ -56,15 +70,19 @@ button:hover {
     color: black;
 }
 
+/* SECTIONS */
+
 section {
     padding: 120px 10%;
     text-align: center;
 }
 
 .parallax {
-    height: 70vh;
+    height: 60vh;
     background: url('https://picsum.photos/1600/1000?random=25') center/cover no-repeat fixed;
 }
+
+/* GALLERY */
 
 .gallery {
     display: grid;
@@ -74,14 +92,17 @@ section {
 
 .gallery img {
     width: 100%;
+    height: auto;
     transition: 0.5s ease;
     cursor: pointer;
 }
 
 .gallery img:hover {
-    transform: scale(1.07);
+    transform: scale(1.05);
     filter: brightness(1.1);
 }
+
+/* FADE ANIMATION */
 
 .fade {
     opacity: 0;
@@ -95,6 +116,7 @@ section {
 }
 
 /* MODAL */
+
 .modal {
     display: none;
     position: fixed;
@@ -105,11 +127,12 @@ section {
     left: 0;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .modal img {
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 100%;
+    max-height: 85vh;
     animation: zoom 0.4s ease;
 }
 
@@ -120,15 +143,79 @@ section {
 
 .close {
     position: absolute;
-    top: 30px;
-    right: 50px;
+    top: 20px;
+    right: 30px;
     font-size: 40px;
     color: white;
     cursor: pointer;
 }
 
 /* DARK MODE */
+
 .dark {
     --bg: #0f0f0f;
     --text: #ffffff;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 50px;
+    }
+
+    section {
+        padding: 100px 8%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .hero {
+        background-attachment: scroll; /* fixes parallax bug on mobile */
+    }
+
+    .hero-overlay {
+        padding: 40px 25px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    section {
+        padding: 80px 6%;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
 }
