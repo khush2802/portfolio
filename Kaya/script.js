@@ -1,10 +1,21 @@
-// THEME
-document.getElementById("themeToggle").addEventListener("click", () => {
-    document.body.classList.toggle("dark");
+// Theme Toggle (White → Dark → Gold)
+const themeBtn = document.getElementById("themeToggle");
+let mode = 0;
+
+themeBtn.addEventListener("click", () => {
+    mode++;
+    document.body.classList.remove("dark", "gold");
+
+    if (mode % 3 === 1) {
+        document.body.classList.add("dark");
+    } else if (mode % 3 === 2) {
+        document.body.classList.add("gold");
+    }
 });
 
-// FADE
+// Fade In
 const fadeEls = document.querySelectorAll(".fade");
+
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -12,9 +23,10 @@ const observer = new IntersectionObserver(entries => {
         }
     });
 }, { threshold: 0.2 });
+
 fadeEls.forEach(el => observer.observe(el));
 
-// MODAL
+// Modal + Swipe
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modalImg");
 const images = document.querySelectorAll(".gallery-img");
@@ -31,10 +43,8 @@ images.forEach((img, index) => {
 });
 
 closeBtn.onclick = () => modal.style.display = "none";
-
 window.onclick = e => { if (e.target == modal) modal.style.display = "none"; };
 
-// SWIPE SUPPORT
 let startX = 0;
 
 modal.addEventListener("touchstart", e => {
