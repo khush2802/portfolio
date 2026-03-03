@@ -18,7 +18,7 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
-// Gallery System
+// Gallery
 const gallery = document.getElementById("gallery");
 const uploadInput = document.getElementById("imageUpload");
 const addBtn = document.getElementById("addImageBtn");
